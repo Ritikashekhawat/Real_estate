@@ -23,8 +23,10 @@
                 <field name="facades"/>
                 <field name="garage"/>
                 <field name="garden"/>
+                <field name="state"/>
                 <field name="garden_area"/>
                 <field name="garden_orientation"/>
+                <field name="active"/>
             </tree>
         </field>
     </record>
@@ -47,8 +49,10 @@
                         <field name="facades"/>
                         <field name="garage"/>
                         <field name="garden"/>
+                        <field name="state"/>
                         <field name="garden_area"/>
                         <field name="garden_orientation"/>
+                        <field name="active"/>  
                     </group>
                 </sheet>
             </form>
