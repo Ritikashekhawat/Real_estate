@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id='estate_property_action' model='ir.actions.act_window'>
+        <field name="name">Real Estate</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Property, the first step of a new property!
+            </p>
+    </record>
+
+
+    <record id="estate_property_view_tree" model="ir.ui.view">
+        <field name="name">estate.property.view.tree</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <tree>
+                        <field name="name"/>
+                        <field name="description"/>
+                    
+                        <field name="postcode"/>
+                        <field name="date_availibilty"/>
+                    
+                        <field name="expected_price"/>
+                        <field name="selling_price"/>
+                        <field name="bedroom"/>
+                        <field name="living_area"/>
+                        <field name="facades"/>
+                        <field name="garage"/>
+                        <field name="garden"/>
+                        <field name="state"/>
+                        <field name="garden_area"/>
+                        <field name="garden_orientation"/>
+                        <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="estate_property_view_form" model="ir.ui.view">
+        <field name="name">estate.property.view.form</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="postcode"/>
+                        <field name="date_availibilty"/>
+                        <field name="expected_price"/>
+                        <field name="selling_price"/>
+                        <field name="bedroom"/>
+                        <field name="living_area"/>
+                        <field name="facades"/>
+                        <field name="garage"/>
+                        <field name="garden"/>
+                        <field name="state"/>
+                        <field name="garden_area"/>
+                        <field name="garden_orientation"/>
+                        <field name="active"/>  
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record> 
+
+<record id="estate_property_view_search" model="ir.ui.view">
+        <field name="name">estate.property.view.search</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search string="Estate Property">
+                    <field name="name"/>
+                    <field name="bedroom"/>
+                    <field name="expected_price"/>
+                    <field name="facades"/>
+                    <field name="postcode"/>
+                    <field name="living_area" filter_domain="[('living_area','>=',self)]"/>
+                    <separator/>
+                    <group expand="1" string="Group By">
+                        <filter string="postcode" name="postcode" context="{'group_by':'postcode'}"/>
+                        <filter string="Name" name="name" context="{'group_by':'name'}"/>
+                    </group>
+            </search>
+        </field>
+    </record>
+
+    <menuitem id="first_level_menu" name="Real estate">
+        <menuitem id="menu_finance_receivables" name="proper   ties" sequence="1">
+            <menuitem id="menu_pro" name="property menu" action="estate_property_action"/>
+            <menuitem id="menu_pro_seting" name="Setting" action="estate_property_action"/>
+            <menuitem id="menu_pro_ava" name="Availability" action="estate_property_action"/>
+            <menuitem id="menu_action_move_out_invoice_type" action="estate_property_action"/>
+
+        </menuitem>
+
+
+        <menuitem id="menu_advertisement" name="Advertisement" sequence="2">
+            <menuitem id="menu_adv_market" name="Marketing" action="estate_property_action"/>
+            <menuitem id="menu_adv_bs" name="Buy/sell" action="estate_property_action"/>
+            <menuitem id="menu_adv_dis" name="Discount" action="estate_property_action"/>
+            <menuitem id="menu_advert" action="estate_property_action"/>
+        </menuitem>
+    </menuitem>
+</odoo>
