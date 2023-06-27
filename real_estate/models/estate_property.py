@@ -4,8 +4,6 @@ class estate_property(models.Model):
     _name = "estate.property"
     _description = 'Property and Many more'
     _log_access=False
-    active =False
-
 
     name = fields.Char("Title", required=True)
     description = fields.Text("Description")
@@ -21,4 +19,4 @@ class estate_property(models.Model):
     state = fields.Selection([('N', 'New'),('OR', 'Offer Received'),('OA', 'Offer Accepted'),('S','Sold'),('c','Cancelled ')], 'State')
     garden_area=fields.Integer("Garden area")
     garden_orientation=fields.Selection( selection=[("N","North"),("S","South"),("E","East"),("W","West")],string="Garden Orientaton")
-    
+    active = fields.Boolean('Active', default=True)
