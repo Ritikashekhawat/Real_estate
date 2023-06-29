@@ -13,7 +13,7 @@
     </record>
 
     <!-- tree view -->
-     <record id="estate_property_view_tree" model="ir.ui.view">
+    <record id="estate_property_view_tree" model="ir.ui.view">
         <field name="name">estate.property.view.tree</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
@@ -21,7 +21,7 @@
                 <field name="name" />
                 <field name="description" />
                 <field name="postcode" />
-                <field name="date_availibilty"/>
+                <field name="date_availibilty" />
                 <field name="expected_price" />
                 <field name="selling_price" />
                 <field name="bedroom" />
@@ -29,9 +29,13 @@
                 <field name="facades" />
                 <field name="garage" optional="hide" />
                 <field name="garden" optional="hide" />
-                <field name="state" invisible="1"/>
+                <field name="state" invisible="1" />
                 <field name="garden_area" optional="hide" />
                 <field name="garden_orientation" optional="hide" />
+                <field name="active" />
+                <field name="property_type_id" />
+                <field name="user_id" />
+                <field name="buyer_id" />
             </tree>
         </field>
     </record>
@@ -44,48 +48,56 @@
             <form string="">
                 <sheet>
                     <group>
-                        <field name="name" />
+                            <group>
+                            <field name="name" />
+                            </group>
+                            <group>
+                                <field name="tag_ids" widget="many2many_tags" />
+                            </group>
+                            <group>
+                                <field name="property_type_id" />
+                                <field name="postcode" />
+                                <field name="date_availibilty" />
+                            </group>
+                            <group>
+                                <field name="expected_price" />
+                                <field name="selling_price" />
+                            </group>
+                        <notebook>
+                            <page string="Description">
+                                    <group>
+                                        <group>
+                                        <field name="description" />
+                                        <field name="bedroom" />
+                                        <field name="living_area" />
+                                        <field name="facades" />
+                                        <field name="garage" />
+                                        <field name="garden" />
+                                        </group>
+                                        <group>                                    
+                                        <field name="garden_area" />
+                                        <field name="garden_orientation" />
+                                        <field name="active" />
+                                        </group>
+                                  </group>
+                            </page>
+                            <page string="Other Info">
+                                <group>
+                                    <field name="user_id" />
+                                    <field name="buyer_id" />
+                                </group>
+                            </page>
+                            <page string="Offers">
+                                <group>
+                                    <field name="offer_ids" />
+                                </group>
+                            </page>
+                        </notebook>
                     </group>
-                    <group>
-                        <group>
-                            <field name="postcode" />
-                            <field name="date_availibilty" />
-                        </group>
-                        <group>
-                            <field name="expected_price" />
-                            <field name="selling_price" />
-                        </group>
-                    </group>
-                    <notebook>
-                        <page string="Description">
-                            <field name="description" />
-                            <group>
-                            <group>
-                                <field name="bedroom" />
-                                <field name="living_area" />
-                                <field name="facades" />
-                                <field name="garage" />
-                                <field name="garden" />
-                            </group>
-                            <group>
-                                <field name="state" />
-                                <field name="garden_area" />
-                                <field name="garden_orientation" />
-                            </group>
-                            </group>
-                        </page>
-                        <page name="Other info">
-                            <group>
-                                <field name="user_id" />
-                                <field name="buyer_id" />
-                            </group>
-                        </page>
-                    </notebook>
                 </sheet>
             </form>
         </field>
     </record>
-
     <!-- Search Bar -->
 
     <record id="estate_property_view_search" model="ir.ui.view">
@@ -106,12 +118,14 @@
 
     <menuitem id="first_level_menu" name="Real Estate">
         <menuitem id="menu_finance_receivables" name="Advertisement">
-             <menuitem id="menu_pro" name="property" action="estate_property_action"/>
+            <menuitem id="menu_pro" name="property" action="estate_property_action" />
         </menuitem>
     </menuitem>
 
-    <menuitem id="menu_setting" name="Setting" parent="first_level_menu"/>
-    <menuitem id="menu_pro_type" name="property Type" parent="menu_setting" action="real_estate.estate_property_type_action"/>  
-    <menuitem id="menu_pro_tag" name="property Tag" parent="menu_setting" action="real_estate.estate_property_tag_action"/>
+    <menuitem id="menu_setting" name="Setting" parent="first_level_menu" />
+    <menuitem id="menu_pro_type" name="property Type" parent="menu_setting"
+        action="real_estate.estate_property_type_action" />
+    <menuitem id="menu_pro_tag" name="property Tag" parent="menu_setting"
+        action="real_estate.estate_property_tag_action" />
 
 </odoo>
