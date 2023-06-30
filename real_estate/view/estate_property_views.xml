@@ -62,7 +62,8 @@
                             <group>
                                 <field name="expected_price" />
                                 <field name="selling_price" />
-                            </group>
+                                <field name="best_offer"/>                   
+                           </group>
                         <notebook>
                             <page string="Description">
                                     <group>
