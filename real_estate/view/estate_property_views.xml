@@ -46,41 +46,45 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form string="">
+                <header>
+                    <button name="action_sold" type="object" string="Sold" />
+                    <button name="action_cancel" type="object" string="Cancel" />
+                </header>
                 <sheet>
                     <group>
-                            <group>
+                        <group>
                             <field name="name" />
-                            </group>
-                            <group>
-                                <field name="tag_ids" widget="many2many_tags" />
-                            </group>
-                            <group>
-                                <field name="property_type_id" />
-                                <field name="postcode" />
-                                <field name="date_availibilty" />
-                            </group>
-                            <group>
-                                <field name="expected_price" />
-                                <field name="selling_price" />
-                                <field name="best_offer"/>                   
-                           </group>
+                        </group>
+                        <group>
+                            <field name="tag_ids" widget="many2many_tags" />
+                        </group>
+                        <group>
+                            <field name="property_type_id" />
+                            <field name="postcode" />
+                            <field name="date_availibilty" />
+                        </group>
+                        <group>
+                            <field name="expected_price" />
+                            <field name="selling_price" />
+                            <field name="best_offer" />
+                        </group>
                         <notebook>
                             <page string="Description">
+                                <group>
                                     <group>
-                                        <group>
                                         <field name="description" />
                                         <field name="bedroom" />
                                         <field name="living_area" />
                                         <field name="facades" />
                                         <field name="garage" />
                                         <field name="garden" />
-                                        </group>
-                                        <group>                                    
+                                    </group>
+                                    <group>
                                         <field name="garden_area" />
                                         <field name="garden_orientation" />
                                         <field name="active" />
-                                        </group>
-                                  </group>
+                                    </group>
+                                </group>
                             </page>
                             <page string="Other Info">
                                 <group>
@@ -89,9 +93,7 @@
                                 </group>
                             </page>
                             <page string="Offers">
-                                <group>
-                                    <field name="offer_ids" />
-                                </group>
+                                <field name="offer_ids" />
                             </page>
                         </notebook>
                     </group>

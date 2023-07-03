@@ -1,6 +1,8 @@
 from odoo import models,fields 
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
+from odoo.exceptions import UserError
+
 
 
 class estate_property(models.Model):
@@ -18,10 +20,10 @@ class estate_property(models.Model):
     living_area=fields.Integer("Living Area", required=True)
     facades=fields.Integer("Facades")
     garage=fields.Boolean("Garage")
-    garden=fields.Boolean("Garden")
+    garden=fields.Boolean("Garden",readonly=False)
     state = fields.Selection([('N', 'New'),('OR', 'Offer Received'),('OA', 'Offer Accepted'),('S','Sold'),('c','Cancelled ')], 'State')
-    garden_area=fields.Integer("Garden area")
-    garden_orientation=fields.Selection( selection=[("N","North"),("S","South"),("E","East"),("W","West")],string="Garden Orientaton")
+    garden_area=fields.Integer("Garden area",compute="_compute_garden_area",readonly=False)
+    garden_orientation=fields.Selection( selection=[("N","North"),("S","South"),("E","East"),("W","West")],string="Garden Orientaton",compute="_compute_garden_area",readonly=False)
     active = fields.Boolean('Active', default=True)
     property_type_id = fields.Many2one("estate.property.type", string="Property Type")
     user_id = fields.Many2one("res.users", string="Salesman", default=lambda self: self.env.user)
@@ -45,3 +47,22 @@ class estate_property(models.Model):
             else:
                 BO.best_offer=0
     
+    @api.depends("garden")
+    def _compute_garden_area(self):
+        for i in self:
+            if i.garden:
+                i.garden_area=10
+                i.garden_orientation='N'    
+            else:
+                i.garden_area=0
+                i.garden_orientation=''
+
+    def action_sold(self):
+        if "c" in self.mapped("state"):
+             raise UserError("Canceled properties cannot be sold")
+        return self.write({"state": "S"})
+
+    def action_cancel(self):
+        if "sold" in self.mapped("state"):
+             raise UserError("Sold properties cannot be canceled.")
+        return self.write({"state": "c"})
