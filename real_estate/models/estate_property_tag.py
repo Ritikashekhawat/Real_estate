@@ -6,3 +6,5 @@ class estate_property_tag(models.Model):
     _log_access=False
 
     name = fields.Char("Property Tag", required=True)
+
+    _sql_constraints = [ ('name_unq','UNIQUE (name)','An offer price must be strictly positive')]

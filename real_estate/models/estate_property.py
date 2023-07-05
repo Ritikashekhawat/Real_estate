@@ -2,7 +2,8 @@ from odoo import models,fields
 from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
 from odoo.exceptions import UserError
-
+from odoo.tools.float_utils import float_compare, float_is_zero
+from odoo.exceptions import ValidationError
 
 
 class estate_property(models.Model):
@@ -21,7 +22,7 @@ class estate_property(models.Model):
     facades=fields.Integer("Facades")
     garage=fields.Boolean("Garage")
     garden=fields.Boolean("Garden",readonly=False)
-    state = fields.Selection([('N', 'New'),('OR', 'Offer Received'),('OA', 'Offer Accepted'),('S','Sold'),('c','Cancelled ')], 'State')
+    state = fields.Selection([('N', 'New'),('OR', 'Offer Received'),('OA', 'Offer Accepted'),('S','Sold'),('c','Cancelled ')], 'Status')
     garden_area=fields.Integer("Garden area",compute="_compute_garden_area",readonly=False)
     garden_orientation=fields.Selection( selection=[("N","North"),("S","South"),("E","East"),("W","West")],string="Garden Orientaton",compute="_compute_garden_area",readonly=False)
     active = fields.Boolean('Active', default=True)
@@ -32,6 +33,10 @@ class estate_property(models.Model):
     offer_ids=fields.One2many('estate.property.offer','property_id')
     total_area=fields.Float(compute="_compute_total_area")
     best_offer=fields.Float("Best Offer",compute="_compute_best_offer")
+
+
+    _sql_constraints = [ ('check_expected_price','CHECK (expected_price > 0)','A property expected price must be strictly positive'),
+    ('check_selling_price','CHECK (selling_price > 0)','A property selling price must be strictly positive')]
 
 
     @api.depends('living_area', 'garden_area')
@@ -57,12 +62,21 @@ class estate_property(models.Model):
                 i.garden_area=0
                 i.garden_orientation=''
 
-    def action_sold(self):
-        if "c" in self.mapped("state"):
-             raise UserError("Canceled properties cannot be sold")
-        return self.write({"state": "S"})
-
     def action_cancel(self):
-        if "sold" in self.mapped("state"):
-             raise UserError("Sold properties cannot be canceled.")
-        return self.write({"state": "c"})
+        # for i in self:
+            if self.state == 'S':
+                raise UserError("A sold property cannot be canceled.")
+            else:
+               self.state = 'c'
+
+    def action_sold(self):
+        # for i in self:
+            if self.state == 'c':
+                raise UserError("A canceled property cannot be sold.")
+            else:
+             self.state = 'S'
+
+    # @api.constrains('selling_price')
+    # def _check_selling_price(self):
+    #         if fields.selling_price > 0.9*fields.expected_price:
+    #             raise ValidationError("The end date cannot be set in the past")
