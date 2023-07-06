@@ -44,23 +44,15 @@ class estate_property_offer(models.Model):
                 record.Validity = (record.date_deadline -
                                    fields.Datetime.today().date()).days
 
+
     def action_accept(self):
-        if "A" in self.mapped("property_id.offer_ids.status"):
-            self.write(
-                {
-                    "status": "A",
-                }
-            )
-        return self.mapped("property_id").write(
-            {
-                "state": "OA",
-                "selling_price": self.price,
-                "buyer_id": self.partner_id.id,
-            }
-        )
+        for i in self:
+            i.status = "A"
+            i.property_id.selling_price = i.price
+            i.property_id.buyer_id = i.partner_id
+            i.property_id.state = "OA"
+
     def action_refuse(self):
-        return self.write(
-            {
-                "status": "R",
-            }
-        )
+       for i in self:
+          i.status = "R"
+          i.property_id.selling_price = 0

@@ -76,7 +76,12 @@ class estate_property(models.Model):
             else:
              self.state = 'S'
 
-    # @api.constrains('selling_price')
-    # def _check_selling_price(self):
-    #         if fields.selling_price > 0.9*fields.expected_price:
-    #             raise ValidationError("The end date cannot be set in the past")
+    @api.constrains('selling_price', 'expected_price')
+    def _check_difference(self):
+        for i in self:
+            if (
+                not float_is_zero(i.selling_price, precision_rounding=0.01) 
+                and float_compare(i.selling_price , i.expected_price*0.90, precision_rounding=0.01) < 0
+               ):
+             raise ValidationError("The selling price cannot be lower than 90% of the expected price.")
+              

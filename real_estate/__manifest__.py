@@ -13,5 +13,8 @@
      'view/estate_property_type.xml',
      'view/estate_property_tag.xml',
      'view/estate_property_views.xml',
+    ],
+    'demo':[
+        'demo/demo_data.xml',
     ]
 }
