@@ -6,6 +6,7 @@
         <field name="res_model">estate.property</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
+        <field name="context">{('search_default_available','=','available')}</field>
             <p class="o_view_nocontent_smiling_face">
                 Create a new Property, the first step of a new property!
             </p>
@@ -17,16 +18,18 @@
         <field name="name">estate.property.view.tree</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-success="state == 'OR'" decoration-danger="state == 'OA'"
+                decoration-muted="state == 'S'" decoration-bf="state == 'OA'">
                 <field name="name" />
                 <field name="description" />
                 <field name="postcode" />
-                <field name="date_availibilty" />
+                <field name="date_availibilty" optional="hide" />
                 <field name="expected_price" />
                 <field name="selling_price" />
                 <field name="bedroom" />
                 <field name="living_area" />
-                <field name="facades" />
+                <field name="state" />
+                <field name="facades" optional='hide' />
                 <field name="garage" optional="hide" />
                 <field name="garden" optional="hide" />
                 <field name="state" invisible="1" />
@@ -49,7 +52,7 @@
                 <header>
                     <button name="action_sold" type="object" string="Sold" />
                     <button name="action_cancel" type="object" string="Cancel" />
-                    <field name="state" widget="statusbar" statusbar_visible="N,OR,OA,S"/>
+                    <field name="state" widget="statusbar" statusbar_visible="N,OR,OA,S" />
                 </header>
                 <sheet>
                     <group>
@@ -57,7 +60,8 @@
                             <field name="name" />
                         </group>
                         <group>
-                            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            <field name="tag_ids" widget="many2many_tags"
+                                options="{'color_field': 'color'}" />
                         </group>
                         <group>
                             <field name="state" />
@@ -82,14 +86,17 @@
                                         <field name="garden" />
                                     </group>
                                     <group>
-                                        <field name="garden_area" attrs="{'invisible':[('garden','=',False)]}"/>
-                                        <field name="garden_orientation" attrs="{'invisible':[('garden','=',False)]}" /> 
+                                        <field name="garden_area"
+                                            attrs="{'invisible':[('garden','=',False)]}" />
+                                        <field name="garden_orientation"
+                                            attrs="{'invisible':[('garden','=',False)]}" />
                                         <field name="active" />
                                     </group>
                                 </group>
                             </page>
                             <page string="Offers">
-                                <field name="offer_ids"  attrs="{'readonly':[('state','in',('OA','S','c'))]}"/>
+                                <field name="offer_ids"
+                                    attrs="{'readonly':[('state','in',('OA','S','c'))]}" />
                             </page>
                             <page string="Other Info">
                                 <group>

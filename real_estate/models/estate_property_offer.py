@@ -21,6 +21,8 @@ class estate_property_offer(models.Model):
         compute="_compute_date_deadline", inverse="_inverse_date_deadline")
     _order = "price desc"
 
+    property_type_id = fields.Many2one("estate.property.type",related="property_id.property_type_id" ,store=True)
+    
     _sql_constraints = [('check_price', 'CHECK (price > 0)',
                          'An offer price must be strictly positive')]
 
@@ -55,3 +57,12 @@ class estate_property_offer(models.Model):
         for i in self:
             i.status = "R"
             i.property_id.selling_price = 0
+   
+
+    def action_view(self):
+        for i in self:
+            i.status = "R"
+            i.property_id.selling_price = 0
+   
+
+   
