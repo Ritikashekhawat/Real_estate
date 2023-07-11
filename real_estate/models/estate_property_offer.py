@@ -1,6 +1,9 @@
 
 from odoo import api, fields, models
 from dateutil.relativedelta import relativedelta
+from odoo.exceptions import UserError
+
+from odoo.tools.float_utils import float_compare
 
 
 class estate_property_offer(models.Model):
@@ -65,4 +68,14 @@ class estate_property_offer(models.Model):
             i.property_id.selling_price = 0
    
 
-   
+    @api.model
+    def create(self, vals):
+        if vals.get("property_id") and vals.get("price"):
+            property_id = self.env["estate.property"].browse(vals["property_id"])
+            if property_id.offer_ids:
+                max_offer = max(property_id.mapped("offer_ids.price"))
+                if float_compare(vals["price"], max_offer, precision_rounding=0.01) <= 0:
+                    raise UserError("The offer must be higher than %.2f" % max_offer)
+            property_id.state = "OR"
+        return super().create(vals)
+

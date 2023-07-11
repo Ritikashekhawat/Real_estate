@@ -6,7 +6,7 @@
         <field name="res_model">estate.property</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
-        <field name="context">{('search_default_available','=','available')}</field>
+        <field name="context">{'search_default_available':True}</field>
             <p class="o_view_nocontent_smiling_face">
                 Create a new Property, the first step of a new property!
             </p>

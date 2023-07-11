@@ -42,6 +42,8 @@ class estate_property(models.Model):
     total_area = fields.Float(compute="_compute_total_area")
     best_offer = fields.Float("Best Offer", compute="_compute_best_offer")
 
+
+
     _sql_constraints = [('check_expected_price', 'CHECK (expected_price > 0)', 'A property expected price must be strictly positive'),
                         ('check_selling_price', 'CHECK (selling_price > 0)', 'A property selling price must be strictly positive')]
 
@@ -91,3 +93,13 @@ class estate_property(models.Model):
             ):
                 raise ValidationError(
                     "The selling price cannot be lower than 90% of the expected price.")
+    
+    
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_state(self):
+        for i in self:
+            if i.state not in ['N', 'c']:
+                raise Warning("You can only delete properties with state 'New' or 'Canceled'.")
+
+
+    
