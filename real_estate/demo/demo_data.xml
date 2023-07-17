@@ -34,6 +34,37 @@
             <field name="garage">False</field>
         </record>
 
+        <record id="demo_data3"
+            model="estate.property">
+            <field name="name">Hotel sayaji</field>
+            <field name="state">OR</field>
+            <field name="description">A 5 star Hotel!</field>
+            <field name="postcode">12</field>
+            <field name="date_availibilty">1970-01-01</field>
+            <field name="expected_price">200000</field>
+            <field name="selling_price">18999999</field>
+            <field name="bedroom">5</field>
+            <field name="living_area">20</field>
+            <field name="facades">6</field>
+            <field name="garage">False</field>
+        </record>
+
+        <record id="demo_data4"
+            model="estate.property">
+            <field name="name">Farm House</field>
+            <field name="state">S</field>
+            <field name="description">Farm House </field>
+            <field name="postcode">521</field>
+            <field name="date_availibilty">1970-01-01</field>
+            <field name="expected_price">10000</field>
+            <field name="selling_price">18999</field>
+            <field name="bedroom">1</field>
+            <field name="living_area">10</field>
+            <field name="facades">4</field>
+            <field name="garage">False</field>
+        </record>
+
+
         <record id="demo_data_property_type1"
             model="estate.property.type">
             <field name="name">Residential</field>
@@ -51,6 +82,9 @@
             <field name="name">Land</field>
         </record>
 
+
+        <!--demo
+        data1-->
         <record id="demo_data_offer1" model="estate.property.offer">
             <field name="partner_id" ref="base.res_partner_12" />
             <field name="property_id" ref="real_estate.demo_data1" />
@@ -69,6 +103,34 @@
             <field name="price">1500001</field>
             <field name="Validity">14</field>
         </record>
-        
+
+        <!--demo
+        3-->
+        <record id="demo_data_offer4" model="estate.property.offer">
+            <field name="partner_id" ref="base.res_partner_12" />
+            <field name="property_id" ref="real_estate.demo_data3" />
+            <field name="price">10000</field>
+            <field name="Validity">14</field>
+        </record>
+        <record id="demo_data_offer5" model="estate.property.offer">
+            <field name="partner_id" ref="base.res_partner_12" />
+            <field name="property_id" ref="real_estate.demo_data3" />
+            <field name="price">1500000</field>
+            <field name="Validity">14</field>
+        </record>
+
+        <!-- demo data 4 -->
+        <record id="demo_data_offer7" model="estate.property.offer">
+            <field name="partner_id" ref="base.res_partner_12" />
+            <field name="property_id" ref="real_estate.demo_data4" />
+            <field name="price">10000</field>
+            <field name="Validity">14</field>
+        </record>
+        <record id="demo_data_offer6" model="estate.property.offer">
+            <field name="partner_id" ref="base.res_partner_12" />
+            <field name="property_id" ref="real_estate.demo_data4" />
+            <field name="price">1500000</field>
+            <field name="Validity">14</field>
+        </record>
     </data>
 </odoo>

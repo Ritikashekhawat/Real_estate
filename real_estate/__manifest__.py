@@ -1,22 +1,24 @@
 {
-    'name' : 'Real Estate',
+    'name': 'Real Estate',
     'summary': "Real Estate App",
     'author': "Odoo",
-    
-    'depends' : ['base',
-                 'mail',],
+
+    'depends': ['base',
+                'mail',],
     'application': True,
-    'installable':True,
-    
-    'data':[
-     'security/ir.model.access.csv',
-     'view/estate_property_offer.xml',
-     'view/estate_property_type.xml',
-     'view/estate_property_tag.xml',
-     'view/estate_property_views.xml',
-     'view/res_users.xml',
+    'installable': True,
+
+    'data': [
+        'security/ir.model.access.csv',
+        'view/estate_property_offer.xml',
+        'view/estate_property_type.xml',
+        'view/estate_property_tag.xml',
+        'view/estate_property_views.xml',
+        'view/res_users.xml',
+        'report/estate_property_reports.xml',
+        'report/estate_property_templates.xml',
     ],
-    'demo':[
+    'demo': [
         'demo/demo_data.xml',
     ]
 }
