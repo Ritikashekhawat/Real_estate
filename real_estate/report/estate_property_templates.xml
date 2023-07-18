@@ -21,25 +21,15 @@
                             <strong>Status : </strong>
                             <span t-field="property.state" />
                         </div>
-                        <!-- <table class="table">
-                            <tbody>
-                                <t t-set="offers" t-value="property.mapped('offer_ids')" />
-                                <tr t-foreach="offers" t-as="offer">
-                                    <td>
-                                        <span t-field="offer.price" />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table> -->
+                        <t t-call="real_estate.report_property_offer" />
                     </div>
                 </t>
             </t>
         </t>
     </template>
 
-
-    <!-- <template id="report_property_offer">
-        <t t-set="offers" t-value="property.mapped('offer_id')" />
+    <template id="report_property_offer">
+        <t t-set="offers" t-value="property.mapped('offer_ids')" />
         <t t-if="offers">
             <table class="table">
                 <thead>
@@ -57,10 +47,10 @@
                             <span t-field="offer.price" />
                         </td>
                         <td>
-                            <span t-field="offer.partner_ids" />
+                            <span t-field="offer.partner_id" />
                         </td>
                         <td>
-                            <span t-field="offer.validity" />
+                            <span t-field="offer.Validity" />
                         </td>
                         <td>
                             <span t-field="offer.date_deadline" />
@@ -77,5 +67,43 @@
                 No Offers yet
             </strong>
         </t>
-    </template> -->
+    </template>
+
+
+    <template id="report_res_users">
+        <t t-foreach="docs" t-as="user">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h1>
+                            <span t-field="user.name" />
+                        </h1>
+
+                        <t t-set="properties" t-value="user.mapped('property_ids')" />
+                        <tr t-foreach="properties" t-as="property">
+                            <div>
+                                <h2>
+                                    <strong>Expected Price : </strong>
+
+                                    <span t-field="property.name" />
+                                </h2>
+                                <h2>
+                                    <strong>Expected Price : </strong>
+                                    <span t-field="property.expected_price" />
+                                </h2>
+                                <h2>
+                                    <strong>status : </strong>
+                                    <span t-field="property.state" />
+                                </h2>
+                            </div>
+
+                            <t t-set="offers" t-value="property.mapped('offer_ids')" />
+                            <t t-call="real_estate.report_property_offer" />
+                        </tr>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
 </odoo>

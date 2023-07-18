@@ -14,7 +14,6 @@ class EstateProperty(models.Model):
             {
                 "partner_id": self.buyer_id.id,
                 "move_type": 'out_invoice',
-                # "journal_id": 'account.journal',
                 "invoice_date": fields.Date.today(),
                 "invoice_line_ids": [
                     Command.create(
