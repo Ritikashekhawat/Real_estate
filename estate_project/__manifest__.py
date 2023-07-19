@@ -7,7 +7,8 @@
     'application': True,
 
     'depends': ['real_estate',
-                'project'],
+                'project'
+                ],
 
     'auto_install': True
 

@@ -1,6 +1,7 @@
 {
     'name': 'Real Estate',
     'summary': "Real Estate App",
+    'category': 'Real Estate/Brokerage',
     'author': "Odoo",
 
     'depends': ['base',
@@ -9,6 +10,7 @@
     'installable': True,
 
     'data': [
+        'security/security.xml',
         'security/ir.model.access.csv',
         'view/estate_property_offer.xml',
         'view/estate_property_type.xml',
