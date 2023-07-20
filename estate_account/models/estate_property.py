@@ -8,7 +8,11 @@ class EstateProperty(models.Model):
     _inherit = "estate.property"
 
     def action_sold(self):
-        print("----------aaccount-------------")
+        print(" reached ".center(100, '='))
+    
+        # print("current user :",self.env.user)
+        # print("self.env.user.has_group :",self.env.user.has_group)
+
 
         self.env['account.move'].create(
             {

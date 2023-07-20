@@ -9,7 +9,7 @@ class EstateProperty(models.Model):
     def action_sold(self):
         print("------------project----")
 
-        self.env['project.project'].create(
+        self.env['project.project'].sudo().create(
             {
                 "name": "Sold Properties",
                 "active": True
