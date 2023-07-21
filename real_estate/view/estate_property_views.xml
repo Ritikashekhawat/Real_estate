@@ -21,6 +21,10 @@
         <field name="arch" type="xml">
             <tree decoration-success="state == 'OR'" decoration-danger="state == 'OA'"
                 decoration-muted="state == 'S'" decoration-bf="state == 'OA'">
+                <header>
+                    <button name="%(real_estate.estate_property_wizard_action)d"
+                        type="action" string="Add Offer"/>
+                </header>
                 <field name="name" />
                 <field name="description" />
                 <field name="postcode" />
@@ -52,9 +56,9 @@
             <form string="">
                 <header>
                     <button name="action_sold" type="object" string="Sold"
-                    attrs="{'invisible':[('state','in',['S','c'])]}" />
+                        attrs="{'invisible':[('state','in',['S','c'])]}" />
                     <button name="action_cancel" type="object" string="Cancel"
-                    attrs="{'invisible':[('state','in',['S','c'])]}" />
+                        attrs="{'invisible':[('state','in',['S','c'])]}" />
                     <field name="state" widget="statusbar" statusbar_visible="N,OR,OA,S" />
                 </header>
                 <sheet>
