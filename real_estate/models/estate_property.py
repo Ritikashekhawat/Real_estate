@@ -103,4 +103,11 @@ class estate_property(models.Model):
                 raise Warning("You can only delete properties with state 'New' or 'Canceled'.")
 
 
-    
+    def action_make_offer(self):
+        return{
+         'type' : "ir.actions.act_window",
+         'name' : 'Add Offer',
+         'res_model' : 'estate.property.wizard',
+         'view_mode' : 'form',
+         'target' : 'new',
+    }

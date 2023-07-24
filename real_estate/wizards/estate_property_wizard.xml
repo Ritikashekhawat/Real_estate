@@ -16,11 +16,12 @@
             <form>
                 <group>
                     <field name="price" />
-                    <field name="property_ids"/>
+                    <field name="validity" />
+                    <field name="buyer_id" />
                 </group>
                 <footer>
-                    <button name="action_add_offer" string="Make Offer" class="oe_right oe_highlight"/>
-                    <!-- <button string="cancle" class="oe_right" special="cancle"/> -->
+                    <button name="make_offer" string="Make Offer" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
                 </footer>
             </form>
         </field>

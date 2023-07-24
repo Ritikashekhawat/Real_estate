@@ -22,8 +22,7 @@
             <tree decoration-success="state == 'OR'" decoration-danger="state == 'OA'"
                 decoration-muted="state == 'S'" decoration-bf="state == 'OA'">
                 <header>
-                    <button name="%(real_estate.estate_property_wizard_action)d"
-                        type="action" string="Add Offer"/>
+                    <button name="action_make_offer" type="object" string="Add Offer" class="btn-secondary"/>
                 </header>
                 <field name="name" />
                 <field name="description" />

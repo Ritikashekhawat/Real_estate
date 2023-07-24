@@ -1,23 +1,23 @@
-from odoo import api,fields,models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
+
 
 class EstatePropertyWizard(models.TransientModel):
     _name = "estate.property.wizard"
-    _description ="Wizard"
+    _description = "Estate Wizard"
 
+    price = fields.Float('Price')
+    validity = fields.Integer("Validity")
+    buyer_id = fields.Many2one('res.partner', string="Buyer", copy=False)
 
-    price = fields.Float("price", required=True)
-    offer_status = fields.Selection(selection=[(
-        "A", "Accepted"), ("R", "Refused"),], string="Status", copy=False)
-    buyer = fields.Many2one('res.partner', string="Buyer", copy=False,tracking=True)
-    
-    def _get_default_property(self):
-        return self.env['estate.property'].browse(self.env.context.get('active_ids'))
-
-    property_ids=fields.Many2many('estate.property',string="estateeee",default=_get_default_property)
-
-    
-    def action_add_offer(self):
-        # for i in self:
-        if self.offer_status == 'A':
-            self.offer_status='A'
+    def make_offer(self):
+        select_propert_id = self.env.context.get('active_ids', [])
+        offers = self.env['estate.property.offer']
+        for pro_i in select_propert_id:
+            offer_ids = {
+                'property_id': pro_i,
+                'price': self.price,
+                'Validity': self.validity,
+                'partner_id': self.buyer_id.id
+            }
+        offers.create(offer_ids)
