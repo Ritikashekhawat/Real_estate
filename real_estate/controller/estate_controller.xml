@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<odoo>
+
+    <!-- <record id="action_properties" model="ir.actions.act_url">
+        <field name="name">Properties</field>
+        <field name="url">/properties</field>
+    </record> -->
+
+    <template id="estate_id">
+        <t t-call="website.layout">
+            <t t-set="title">Estates Property</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <center>
+                        <h2>Property Details</h2>
+                    </center>
+                    <br />
+                    <br />
+                    <div class="row">
+                        <t t-foreach="records" t-as="property">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <img t-attf-src="data:image/png;base64,{{property.pro_image}}"
+                                        class="card-img-top embed-responsive-item"
+                                        style="width:110%;" alt="Property Image" />
+                                    <a t-attf-href="/property/{{property.name}}">
+                                        <h2>
+                                            <t t-esc="property.name" />
+                                        </h2>
+                                    </a>
+                                    <p>Expected price : <t t-esc="property.expected_price" />
+                                    </p>
+                                    <p>Description <t t-esc="property.description" />
+                                    </p>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

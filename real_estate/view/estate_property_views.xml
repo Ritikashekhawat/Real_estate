@@ -5,8 +5,8 @@
         <field name="name">Real Estate</field>
         <field name="res_model">estate.property</field>
         <field name="view_mode">tree,form,kanban</field>
+        <field name="context">{'search_default_available':True}</field>
         <field name="help" type="html">
-            <field name="context">{'search_default_available':True}</field>
             <p class="o_view_nocontent_smiling_face">
                 Create a new Property, the first step of a new property!
             </p>
@@ -22,7 +22,8 @@
             <tree decoration-success="state == 'OR'" decoration-danger="state == 'OA'"
                 decoration-muted="state == 'S'" decoration-bf="state == 'OA'">
                 <header>
-                    <button name="action_make_offer" type="object" string="Add Offer" class="btn-secondary"/>
+                    <button name="action_make_offer" type="object" string="Add Offer"
+                        class="btn-secondary" />
                 </header>
                 <field name="name" />
                 <field name="description" />
@@ -62,6 +63,9 @@
                 </header>
                 <sheet>
                     <group>
+                        <field name="pro_image" class="oe_avatar" widget="image" />
+                    </group>
+                    <group>
                         <group>
                             <field name="name" />
                         </group>
@@ -71,7 +75,9 @@
                         </group>
                         <group>
                             <field name="state" />
-                            <field name="property_type_id" />
+                            <field name="property_type_id"
+                                options="{'no_edit': True, 'no_create':True}" />
+
                             <field name="postcode" />
                             <field name="date_availibilty" />
                         </group>
@@ -120,6 +126,7 @@
             </form>
         </field>
     </record>
+
     <!-- Search Bar -->
 
     <record id="estate_property_view_search" model="ir.ui.view">

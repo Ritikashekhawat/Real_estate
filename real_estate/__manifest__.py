@@ -5,7 +5,7 @@
     'author': "Odoo",
 
     'depends': ['base',
-                'mail',],
+                'mail','website'],
     'application': True,
     'installable': True,
 
@@ -20,6 +20,7 @@
         'report/estate_property_reports.xml',
         'report/estate_property_templates.xml',
         'wizards/estate_property_wizard.xml',
+        'controller/estate_controller.xml',
     ],
     'demo': [
         'demo/demo_data.xml',
