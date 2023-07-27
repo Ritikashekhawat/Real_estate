@@ -21,6 +21,7 @@
         'report/estate_property_templates.xml',
         'wizards/estate_property_wizard.xml',
         'controller/estate_controller.xml',
+        'controller/controller_property.xml',
     ],
     'demo': [
         'demo/demo_data.xml',

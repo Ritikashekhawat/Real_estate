@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <odoo>
-
-    <!-- <record id="action_properties" model="ir.actions.act_url">
+    <record id="property_link" model="website.menu">
         <field name="name">Properties</field>
-        <field name="url">/properties</field>
-    </record> -->
+        <field name="url">/estate_details</field>
+        <field name="parent_id" ref="website.main_menu" />
+        <field name="sequence">99</field>
+    </record>
 
     <template id="estate_id">
         <t t-call="website.layout">
@@ -17,23 +16,36 @@
                         <h2>Property Details</h2>
                     </center>
                     <br />
-                    <br />
                     <div class="row">
                         <t t-foreach="records" t-as="property">
                             <div class="col-md-4">
-                                <div class="card">
-                                    <img t-attf-src="data:image/png;base64,{{property.pro_image}}"
-                                        class="card-img-top embed-responsive-item"
-                                        style="width:110%;" alt="Property Image" />
-                                    <a t-attf-href="/property/{{property.name}}">
-                                        <h2>
-                                            <t t-esc="property.name" />
-                                        </h2>
-                                    </a>
-                                    <p>Expected price : <t t-esc="property.expected_price" />
-                                    </p>
-                                    <p>Description <t t-esc="property.description" />
-                                    </p>
+                                <div class="card"
+                                    style="width:300px;margin:20px;">
+                                    <div class="card-block">
+                                        <center>
+                                            <img
+                                                t-attf-src="data:image/png;base64,{{property.pro_image}}"
+                                                class="card-img-top embed-responsive-item"
+                                                style="width: 18rem; height: 10rem;"
+                                                alt="Property Image" />
+                                        </center>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <a t-attf-href="/property/{{property.name}}">
+                                            <h3>
+                                                <t t-esc="property.name" />
+                                            </h3>
+                                        </a>
+                                        <p>Expected price : <t t-esc="property.expected_price" />
+                                        </p>
+                                        <p>Description <t t-esc="property.description" />
+                                        </p>
+                                        <p>
+                                        </p>
+                                        <a t-attf-href="/estate/{{ slug(property) }} "
+                                            class="btn btn-primary">View</a>
+                                    </div>
                                 </div>
                             </div>
                         </t>
@@ -41,5 +53,11 @@
                 </div>
             </div>
         </t>
+        <div class="products_pager form-inline justify-content-center mt-3">
+            <t t-call="website.pager">
+                <t t-set="_classes">mt-2 ml-md-2</t>
+                <t t-raw="pager"></t>
+            </t>
+        </div>
     </template>
 </odoo>

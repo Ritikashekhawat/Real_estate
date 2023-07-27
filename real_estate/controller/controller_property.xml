@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="index1">
+        <t t-call="website.layout">
+            <t t-set="title">Property</t>
+            <div class="oe_structure" />
+            <div class="oe_structure">
+                <div class="container">
+                    <div class="row">
+                        <t t-foreach="properties" t-as="property">
+                            <li>
+                                <h2>
+                                    <t t-esc="property.name" />
+                                </h2>
+                                <!-- <p>
+                                    <t t-esc="property.description" />
+                                </p>
+                                <p>Price: <t t-esc="property.price" /></p> -->
+                            </li>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
