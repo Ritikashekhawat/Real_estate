@@ -1,26 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="index1">
+
+    <template id="property_details_template">
         <t t-call="website.layout">
-            <t t-set="title">Property</t>
-            <div class="oe_structure" />
-            <div class="oe_structure">
-                <div class="container">
-                    <div class="row">
-                        <t t-foreach="properties" t-as="property">
-                            <li>
-                                <h2>
-                                    <t t-esc="property.name" />
-                                </h2>
-                                <!-- <p>
-                                    <t t-esc="property.description" />
-                                </p>
-                                <p>Price: <t t-esc="property.price" /></p> -->
-                            </li>
-                        </t>
-                    </div>
+            <div class="container mt-4" style="background-color: #ffe5b4;">
+                <div class="row justify-content-center">
+                    <center>
+                        <div class="card" style="width:800px; margin:20px;">
+                            <div class="card-body">
+                                <center>
+                                    <div class="image-container">
+                                        <img
+                                            t-attf-src="data:image/png;base64,{{property_data.pro_image}}"
+                                            class="card-img-top image-fit" alt="Property Image" />
+                                    </div>
+                                </center>
+                                <div class="card shadow" style="background-color: #fffdd0;">
+                                    <h1>
+                                        <t t-esc="property_data.name"
+                                            class="mt16" />
+                                    </h1>
+                                    <strong>Description: </strong>
+                                    <t t-esc="property_data.description" />
+                                    <strong>Expected Price: <t
+                                            t-esc="property_data.expected_price" /></strong>
+                                    <strong>Bedroom : <t t-esc="property_data.bedroom" /></strong>
+                                    <strong>Living Area : <t t-esc="property_data.living_area" /></strong>
+                                    <strong>Garden : <t t-esc="property_data.garden" /></strong>
+                                    <p>
+                                        <strong>Tags: </strong>
+                                        <t t-foreach="property_data.tag_ids" t-as="tag">
+                                            <span
+                                                style="background-color: #ff6347; color: #fff; padding: 2px 10px; border-radius: 15px;"
+                                                t-esc="tag.name" />
+                                        </t>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </center>
                 </div>
             </div>
         </t>
     </template>
+
 </odoo>

@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="property_link" model="website.menu">
-        <field name="name">Properties</field>
-        <field name="url">/estate_details</field>
-        <field name="parent_id" ref="website.main_menu" />
-        <field name="sequence">99</field>
-    </record>
+    <data>
+        <record id="properties_grid_main_menu" model="website.menu">
+            <field name="name">Properties</field>
+            <field name="url">/estate_details</field>
+            <field name="parent_id" ref="website.main_menu" />
+        </record>
+    </data>
 
     <template id="estate_id">
         <t t-call="website.layout">
             <t t-set="title">Estates Property</t>
             <div class="oe_structure">
-                <div class="container">
-                    <center>
-                        <h2>Property Details</h2>
+                <div class="container" style="background-color: #ffe5b4;">
+                    <form method="get" class="form-inline mb-3">
+                        <label for="date_picker">Listed After:</label>
+                        <input type="date" t-att-value="create_date1" name="create_date1" />
+                        <button type="submit" class="btn btn-primary ml-2">Search</button>
+                    </form>
+                    <center style="background-color:#f5f5dc;">
+                        <h1>
+                            <b>
+                                <i style="color:#A0522D;">PROPERTIES</i>
+                            </b>
+                        </h1>
                     </center>
                     <br />
+
                     <div class="row">
                         <t t-foreach="records" t-as="property">
                             <div class="col-md-4">
@@ -30,21 +41,27 @@
                                                 alt="Property Image" />
                                         </center>
                                     </div>
-
                                     <div class="card-body">
-                                        <a t-attf-href="/property/{{property.name}}">
-                                            <h3>
-                                                <t t-esc="property.name" />
-                                            </h3>
-                                        </a>
-                                        <p>Expected price : <t t-esc="property.expected_price" />
-                                        </p>
-                                        <p>Description <t t-esc="property.description" />
-                                        </p>
-                                        <p>
-                                        </p>
-                                        <a t-attf-href="/estate/{{ slug(property) }} "
-                                            class="btn btn-primary">View</a>
+                                        <h3><em>
+                                            <t t-esc="property.name" />
+                                        </em></h3>
+                                        <pr>
+                                            <i>Expected price : <t t-esc="property.expected_price" />
+                                            </i>
+                                            <br />
+                                            <i>Description : <t t-esc="property.description" /></i>
+                                            <br />
+                                            
+                                            <p><strong>Tags: </strong>
+                                                <t t-foreach="property.tag_ids" t-as="tag">
+                                                    <span style="background-color: #ff6347; color: #fff; padding: 2px 10px; border-radius: 15px;" t-esc="tag.name"/>
+                                                </t>
+                                            </p>
+                                            <br />
+                                        </pr>
+                                        <br />
+                                        <a t-attf-href="/estate_details/#{property.id}"
+                                            class="btn btn-primary">View Property</a>
                                     </div>
                                 </div>
                             </div>
@@ -52,12 +69,12 @@
                     </div>
                 </div>
             </div>
+                <div class="products_pager form-inline justify-content-center mt-3">
+                    <t t-call="website.pager">
+                        <t t-set="_classes">mt-2 ml-md-2</t>
+                        <t t-raw="pager"></t>
+                    </t>
+                </div>
         </t>
-        <div class="products_pager form-inline justify-content-center mt-3">
-            <t t-call="website.pager">
-                <t t-set="_classes">mt-2 ml-md-2</t>
-                <t t-raw="pager"></t>
-            </t>
-        </div>
     </template>
 </odoo>

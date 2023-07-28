@@ -10,7 +10,6 @@ class estate_property_offer(models.Model):
 
     _name = "estate.property.offer"
     _description = 'Property offer'
-   # _log_access=False
 
     price = fields.Float("price", required=True)
     status = fields.Selection(selection=[(

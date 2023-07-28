@@ -10,7 +10,6 @@ class estate_property(models.Model):
     _name = "estate.property"
     _inherit ='mail.thread'
     _description = 'Property and Many more'
-    _log_access = False
     _order = "id desc"
 
     name = fields.Char("Title", required=True,traking=True)

@@ -9,11 +9,6 @@ class EstateProperty(models.Model):
 
     def action_sold(self):
         print(" reached ".center(100, '='))
-    
-        # print("current user :",self.env.user)
-        # print("self.env.user.has_group :",self.env.user.has_group)
-
-
         self.env['account.move'].create(
             {
                 "partner_id": self.buyer_id.id,
