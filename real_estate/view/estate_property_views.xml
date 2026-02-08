@@ -56,9 +56,9 @@
             <form string="">
                 <header>
                     <button name="action_sold" type="object" string="Sold"
-                        attrs="{'invisible':[('state','in',['S','c'])]}" />
+                       invisible="state in ['S', 'c']"/>
                     <button name="action_cancel" type="object" string="Cancel"
-                        attrs="{'invisible':[('state','in',['S','c'])]}" />
+                       invisible="state in ['S', 'c']"/>
                     <field name="state" widget="statusbar" statusbar_visible="N,OR,OA,S" />
                 </header>
                 <sheet>
@@ -99,16 +99,16 @@
                                     </group>
                                     <group>
                                         <field name="garden_area"
-                                            attrs="{'invisible':[('garden','=',False)]}" />
+                                            invisible="garden == 'False'"/>
                                         <field name="garden_orientation"
-                                            attrs="{'invisible':[('garden','=',False)]}" />
+                                            invisible="garden == 'False'"/>
                                         <field name="active" />
                                     </group>
                                 </group>
                             </page>
                             <page string="Offers">
                                 <field name="offer_ids"
-                                    attrs="{'readonly':[('state','in',('OA','S','c'))]}" />
+                                    invisible="state in ['OA','S', 'c']" />
                             </page>
                             <page string="Other Info">
                                 <group>

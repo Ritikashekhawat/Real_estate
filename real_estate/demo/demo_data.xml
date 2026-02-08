@@ -64,7 +64,7 @@
             <field name="garage">False</field>
         </record>
 
-
+<!-- type -->
         <record id="demo_data_property_type1"
             model="estate.property.type">
             <field name="name">Residential</field>
